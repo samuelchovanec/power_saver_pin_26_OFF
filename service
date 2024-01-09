@@ -6,7 +6,6 @@ from datetime import datetime
 from hosted import config, device, node, config
 
 config.restart_on_update()
-device.gpio.setup_pin(26, direction="out")
 device.gpio.set_pin_value(26, high=True)
 
 
