@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <script src='hosted.js'></script>
+    <script src='times.js'></script>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #444;
+        margin: 0 auto;
+        padding: 5px;
+        user-select: none;
+      }
+      .day {
+        width: 80px;
+        height: 20px;
+        margin: 1px;
+        padding: 2px;
+        display: inline-block;
+      }
+      .hour {
+        width: 20px;
+        height: 20px;
+        margin: 1px;
+        padding: 2px;
+        display: inline-block;
+        background-color: tomato;
+        cursor: pointer;
+      }
+      .hour.active {
+        background-color: lightgreen;
+      }
+      .title {
+        color: #333;
+        margin-top: 10px;
+        padding-top: 5px;
+        border-top: 1px solid #eee;
+      }
+      .red {
+        color: red;
+      }
+      .green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='config'></div>
+    <div class='title'>
+      Select during which hours of each weekday your device should be active. <span class='green'>Green</span> means your
+      device is active, <span class='red'>red</span> means your device is in sleep mode. You can click and drag to change
+      multiple hours at once.
+    </div>
+    <script>
+      ib.getConfig(function(times) {
+        var times = times_from_config(times);
+        var config = Config(times, function(times) {
+          ib.setConfig(times);
+        });
+      });
+    </script>
+  </body>
+</html>

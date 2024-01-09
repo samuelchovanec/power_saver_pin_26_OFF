@@ -1,0 +1,15 @@
+{
+    "name": "Power Saver_GPIO",
+    "author": "Samuel Majstrenko" ,
+    "desc": "Powers down the screen at configurable times. Add to any of your Setups.",
+    "repository": "https://github.com/info-beamer/package-power-saver",
+    "platforms": ["pi/epoch-1", "pi/epoch-2"],
+    "offline": {
+        "support": "no",
+        "info": "Requires correct system time to decide when to turn on/off displays"
+    },
+    "nesting": {
+        "parents": "any",
+        "childs": []
+    }
+}

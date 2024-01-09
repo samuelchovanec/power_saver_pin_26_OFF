@@ -1,0 +1,44 @@
+#!/usr/bin/python2.7
+import time
+import sys
+import pytz
+from datetime import datetime
+from hosted import config, device, node, config
+
+config.restart_on_update()
+
+device.gpio.set_pin_value(26, high=True)
+device.gpio.setup_pin(26, direction="out")
+
+timezone = config.timezone
+if timezone == "device":
+    timezone = config.metadata['timezone']
+print >>sys.stderr, "Using timezone: %s" % timezone
+
+tz = pytz.timezone(timezone)
+
+device.screen(on = True)
+while time.time() < 10000000:
+    print >>sys.stderr, "waiting for correct system time"
+    time.sleep(1)
+
+time.sleep(15)
+
+while 1:
+    now = pytz.utc.localize(datetime.utcnow(), is_dst=None).astimezone(tz)
+    print >>sys.stderr, now
+
+    dow = now.weekday()
+    hour = now.hour
+    hour = dow * 24 + hour
+    print >>sys.stderr, "Hour: %d" % hour
+    
+    try:
+        on = config.times[hour]
+    except IndexError:
+        on = True
+    print >>sys.stderr, "Screen on: %r" % on
+
+    device.screen(on = on)
+
+    time.sleep(60)
