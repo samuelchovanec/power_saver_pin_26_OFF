@@ -7,6 +7,7 @@ from hosted import config, device, node, config
 
 config.restart_on_update()
 device.gpio.set_pin_value(26, high=True)
+device.gpio.set_pin_value(19, high=True)
 
 
 timezone = config.timezone
